@@ -20,7 +20,8 @@ String.prototype.rightChars = function(n){
       clearOnHighlight  : true,
       typerDataAttr     : 'data-typer-targets',
       typerInterval     : 2000,
-      random			: true,
+      random			: false,
+      wholeWord			: false
     },
     highlight,
     clearText,
@@ -59,7 +60,8 @@ String.prototype.rightChars = function(n){
       'primaryColor',
       'backgroundColor',
       'text',
-      'typing'
+      'typing',
+      'currentIndex'
     ]);
   };
 
@@ -217,7 +219,7 @@ String.prototype.rightChars = function(n){
       j = 0;
 
     if (currentText === newString) {
-      console.log("Our strings our equal, nothing to type");
+      console.log("Our strings are equal, nothing to type");
       return $e;
     }
 
@@ -228,12 +230,14 @@ String.prototype.rightChars = function(n){
 
     $e.data('typing', true);
 
-    while (currentText.charAt(i) === newString.charAt(i)) {
-      i++;
-    }
+	if(!$.typer.options.wholeWord){
+	    while (currentText.charAt(i) === newString.charAt(i)) {
+	      i++;
+	    }
 
-    while (currentText.rightChars(j) === newString.rightChars(j)) {
-      j++;
+	    while (currentText.rightChars(j) === newString.rightChars(j)) {
+	      j++;
+	    }
     }
 
     newString = newString.substring(i, newString.length - j + 1);
