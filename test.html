@@ -3,17 +3,19 @@
 <head>
 </head>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="/src/jquery.typer.js"></script>
+  <script src="src/jquery.typer.js"></script>
 <body>
 
   <h1>Hello, World!</h1>
-  <h2 data-typer-targets="Hello,Hi,Hola,Hallo,Haai,Ola,Kaixo,Moni,Aloha,Bonjour,Ciao,Hej">Welcome</h2>
+  <h2 class="typer_wholeword" data-typer-targets="Hello,Hi,Hola,Hallo,Haai,Ola,Kaixo,Moni,Aloha,Bonjour,Ciao,Hej">Welcome</h2>
 
-  <h2 data-typer-targets="abcdefgfedcba,afgfa">Welcome</h2>
+  <h2 class="typer" data-typer-targets="abcdefgfedcba,afgfa">Welcome</h2>
 
   <script>
     $(function () {
-      $('[data-typer-targets]').typer({
+      $('.typer').typer();
+
+      $('.typer_wholeword').typer({
 	  	wholeWord: true,
 	  });
     });

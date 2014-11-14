@@ -243,15 +243,15 @@
 
 	// The default settings
 	$.fn.typer.defaults = {
-      highlightSpeed    : 20,
-      typeSpeed         : 100,
-      clearDelay        : 500,
-      typeDelay         : 200,
-      clearOnHighlight  : true,
-      typerDataAttr     : 'data-typer-targets',
-      typerInterval     : 2000,
-      random			: false,
-      wholeWord			: false
+		highlightSpeed    : 20,
+		typeSpeed         : 100,
+		clearDelay        : 500,
+		typeDelay         : 200,
+		clearOnHighlight  : true,
+		typerDataAttr     : 'data-typer-targets',
+		typerInterval     : 2000,
+		random			: false,
+		wholeWord			: false
 	}
 
 	String.prototype.rightChars = function(n){
