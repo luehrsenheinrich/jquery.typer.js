@@ -3,7 +3,7 @@
 <head>
 </head>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="/src/jquery.typer.js"></script>
+  <script src="/src/jquery.typer.2.js"></script>
 <body>
 
   <h1>Hello, World!</h1>
@@ -11,12 +11,11 @@
 
   <h2 data-typer-targets="abcdefgfedcba,afgfa">Welcome</h2>
 
-  <h2 data-typer-targets="Berlin,Düsseldorf,München,Regensburg,Köln,Stuttgart">Welcome</h2>
-
-
   <script>
     $(function () {
-      $('[data-typer-targets]').typer();
+      $('[data-typer-targets]').typer({
+	  	wholeWord: true,
+	  });
     });
   </script>
 </body>
