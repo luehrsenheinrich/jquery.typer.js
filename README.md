@@ -42,11 +42,41 @@ There are some options that are available to you as well:
 }
 ```
 
-Set the options individually:
+Set the defaults individually:
 
 ```javascript
 $.typer.options.highlightSpeed = 500;
 ```
+
+You can submit the options to your typer object as per jQuery standard: 
+
+```javascript
+$("element").typer({
+  highlightSpeed    : 20,
+  typeSpeed         : 100,
+  clearDelay        : 500,
+  typeDelay         : 200,
+  clearOnHighlight  : true,
+  typerDataAttr     : 'data-typer-targets',
+  typerInterval     : 2000,
+  random            : false,
+  wholeWord         : false
+});
+
+$("element").typeTo("new Word", {  
+  highlightSpeed    : 20,
+  typeSpeed         : 100,
+  clearDelay        : 500,
+  typeDelay         : 200,
+  clearOnHighlight  : true,
+  typerDataAttr     : 'data-typer-targets',
+  typerInterval     : 2000,
+  random            : false,
+  wholeWord         : false
+});
+  
+```
+
 ## About
 
 jquery.typer.js was originally developed for [LayerVault](http://layervault.com) by [Kelly Sutton](http://kellysutton.com).
