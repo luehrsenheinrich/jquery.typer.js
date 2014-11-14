@@ -19,7 +19,8 @@ String.prototype.rightChars = function(n){
       typeDelay         : 200,
       clearOnHighlight  : true,
       typerDataAttr     : 'data-typer-targets',
-      typerInterval     : 2000
+      typerInterval     : 2000,
+      random			: true,
     },
     highlight,
     clearText,
@@ -161,7 +162,23 @@ String.prototype.rightChars = function(n){
       });
     }
 
-    $e.typeTo(targets[Math.floor(Math.random()*targets.length)]);
+    if($.typer.options.random){
+	    // Just select the target to type randomly
+	    $e.typeTo(targets[Math.floor(Math.random()*targets.length)]);
+	} else {
+		// Determine the next index from the targets array and type that
+	    if(typeof($e.data('currentIndex')) == "undefined"){
+	      $e.data('currentIndex', 0);
+	    } else {
+	      $e.data('currentIndex', $e.data('currentIndex') + 1);
+	    }
+
+	    if(typeof(targets[$e.data('currentIndex')]) == "undefined"){
+	      $e.data('currentIndex', 0);
+	    }
+
+	    $e.typeTo(targets[$e.data('currentIndex')]);
+	}
   };
 
   // Expose our options to the world.
