@@ -37,8 +37,8 @@ There are some options that are available to you as well:
   clearOnHighlight  : true,
   typerDataAttr     : 'data-typer-targets',
   typerInterval     : 2000,
-  random			      : false,
-  wholeWord			    : false
+  random            : false,
+  wholeWord         : false
 }
 ```
 
