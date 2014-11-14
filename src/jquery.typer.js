@@ -61,7 +61,6 @@ String.prototype.rightChars = function(n){
       'backgroundColor',
       'text',
       'typing',
-      'currentIndex'
     ]);
   };
 
