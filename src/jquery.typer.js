@@ -1,6 +1,9 @@
+/* global console */
+/* jshint freeze:false */
+
 (function($){
 
-	spanWithColor = function(color, backgroundColor) {
+	var spanWithColor = function(color, backgroundColor) {
 		if (color === 'rgba(0, 0, 0, 0)') {
 		  color = 'rgb(255, 255, 255)';
 		}
@@ -10,7 +13,7 @@
 		  .css('background-color', backgroundColor);
 	};
 
-	isNumber = function (n) {
+	var isNumber = function (n) {
 		return !isNaN(parseFloat(n)) && isFinite(n);
 	};
 
@@ -19,7 +22,7 @@
 	 *
 	 * @param {object} $e The jQuery object of the typer element
 	 */
-	clearData = function ($e) {
+	var clearData = function ($e) {
 		$e.removeData([
 			'typePosition',
 			'highlightPosition',
@@ -37,7 +40,7 @@
 	 *
 	 * @param {object} $e The jQuery object of the typer element.
 	 */
-	type = function ($e) {
+	var type = function ($e) {
 		var
 		text = $e.data('text'),
 		oldLeft = $e.data('oldLeft'),
@@ -69,11 +72,11 @@
 	};
 
 	/**
- 	 * Clears the text, after it has been highlighted
+	 * Clears the text, after it has been highlighted
      *
 	 * @param {object} $e The jQuery object of the typer element.
 	 */
-	clearText = function ($e) {
+	var clearText = function ($e) {
 		$e.find('span').remove();
 
 		setTimeout(function () {
@@ -85,7 +88,7 @@
 	 *
 	 * @param {object} $e The jQuery object of the typer element.
 	 */
-	highlight = function ($e) {
+	var highlight = function ($e) {
 		var
 		  position = $e.data('highlightPosition'),
 		  leftText,
@@ -129,7 +132,7 @@
 	*
 	* @param {object} $e The jQuery object of the typer element.
 	*/
-	typeWithAttribute = function ($e) {
+	var typeWithAttribute = function ($e) {
 		var targets;
 
 		if ($e.data('typing')) {
@@ -151,13 +154,13 @@
 		    $e.typeTo(targets[Math.floor(Math.random()*targets.length)]);
 		} else {
 			// Determine the next index from the targets array and type that
-		    if(typeof($e.data('currentIndex')) == "undefined"){
+		    if(typeof($e.data('currentIndex')) === "undefined"){
 		      $e.data('currentIndex', 0);
 		    } else {
 		      $e.data('currentIndex', $e.data('currentIndex') + 1);
 		    }
 
-		    if(typeof(targets[$e.data('currentIndex')]) == "undefined"){
+		    if(typeof(targets[$e.data('currentIndex')]) === "undefined"){
 		      $e.data('currentIndex', 0);
 		    }
 
@@ -188,18 +191,17 @@
 		  }, $e.data('typerOptions').typerInterval);
 
 		});
-    }
+    };
 
     /**
 	 * Bootstrap the $el.typeTo function
 	 */
 	$.fn.typeTo = function ( newString, options ) {
-		 var
-	      $e = $(this),
-	      currentText = $e.text(),
-	      opts = $.extend( {}, $.fn.typer.defaults, options );
-	      i = 0,
-	      j = 0;
+		var $e = $(this),
+			currentText = $e.text(),
+			opts = $.extend( {}, $.fn.typer.defaults, options ),
+			i = 0,
+			j = 0;
 
 	    if (currentText === newString) {
 	      console.log("Our strings are equal, nothing to type");
@@ -239,7 +241,7 @@
 	    highlight($e);
 
 	    return $e;
-	}
+	};
 
 	// The default settings
 	$.fn.typer.defaults = {
@@ -252,7 +254,7 @@
 		typerInterval     : 2000,
 		random			: false,
 		wholeWord			: false
-	}
+	};
 
 	String.prototype.rightChars = function(n){
 		if (n <= 0) {
