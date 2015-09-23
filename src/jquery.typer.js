@@ -5,12 +5,12 @@
 
 	var spanWithColor = function(color, backgroundColor) {
 		if (color === 'rgba(0, 0, 0, 0)') {
-		  color = 'rgb(255, 255, 255)';
+			color = 'rgb(255, 255, 255)';
 		}
 
 		return $('<span></span>')
-		  .css('color', color)
-		  .css('background-color', backgroundColor);
+			.css('color', color)
+			.css('background-color', backgroundColor);
 	};
 
 	var isNumber = function (n) {
@@ -65,7 +65,6 @@
 		// $e.text($e.text() + text.substring(position, position + 1));
 
 		// $e.data('typePosition', position + 1);
-
 		setTimeout(function () {
 			type($e);
 		}, $e.data('typerOptions').typeSpeed);
@@ -73,15 +72,15 @@
 
 	/**
 	 * Clears the text, after it has been highlighted
-     *
+		 *
 	 * @param {object} $e The jQuery object of the typer element.
 	 */
 	var clearText = function ($e) {
 		$e.find('span').remove();
 
 		setTimeout(function () {
-		  type($e);
-		},  $e.data('typerOptions').typeDelay);
+			type($e);
+		},	$e.data('typerOptions').typeDelay);
 	};
 	/**
 	 * Highlights the text
@@ -90,20 +89,20 @@
 	 */
 	var highlight = function ($e) {
 		var
-		  position = $e.data('highlightPosition'),
-		  leftText,
-		  highlightedText,
-		  rightText;
+			position = $e.data('highlightPosition'),
+			leftText,
+			highlightedText,
+			rightText;
 
 		if (!isNumber(position)) {
-		  position = $e.data('rightStop') + 1;
+			position = $e.data('rightStop') + 1;
 		}
 
 		if (position <= $e.data('leftStop')) {
-		  setTimeout(function () {
-		    clearText($e);
-		  }, $e.data('typerOptions').clearDelay);
-		  return;
+			setTimeout(function () {
+				clearText($e);
+			}, $e.data('typerOptions').clearDelay);
+			return;
 		}
 
 		leftText = $e.text().substring(0, position - 1);
@@ -111,19 +110,19 @@
 		rightText = $e.text().substring($e.data('rightStop') + 1);
 
 		$e.html(leftText)
-		  .append(
-		    spanWithColor(
-		        $e.data('backgroundColor'),
-		        $e.data('primaryColor')
-		      )
-		      .append(highlightedText)
-		  )
-		  .append(rightText);
+			.append(
+				spanWithColor(
+						$e.data('backgroundColor'),
+						$e.data('primaryColor')
+					)
+					.append(highlightedText)
+			)
+			.append(rightText);
 
 		$e.data('highlightPosition', position - 1);
 
 		setTimeout(function () {
-		  return highlight($e);
+			return highlight($e);
 		}, $e.data('typerOptions').highlightInterval);
 	};
 
@@ -136,64 +135,67 @@
 		var targets;
 
 		if ($e.data('typing')) {
-		  return;
+			return;
+		}
+
+		if ($e.data('typerOptions').stopOnHover && $e.is(':hover')) {
+			return;
 		}
 
 		try {
-		  targets = JSON.parse($e.attr($e.data('typerOptions').typerDataAttr)).targets;
+			targets = JSON.parse($e.attr($e.data('typerOptions').typerDataAttr)).targets;
 		} catch (e) {}
 
 		if (typeof targets === "undefined") {
-		  targets = $.map($e.attr($e.data('typerOptions').typerDataAttr).split(','), function (e) {
-		    return $.trim(e);
-		  });
+			targets = $.map($e.attr($e.data('typerOptions').typerDataAttr).split(','), function (e) {
+				return $.trim(e);
+			});
 		}
 
 		if($e.data('typerOptions').random){
-		    // Just select the target to type randomly
-		    $e.typeTo(targets[Math.floor(Math.random()*targets.length)]);
+				// Just select the target to type randomly
+				$e.typeTo(targets[Math.floor(Math.random()*targets.length)]);
 		} else {
 			// Determine the next index from the targets array and type that
-		    if(typeof($e.data('currentIndex')) === "undefined"){
-		      $e.data('currentIndex', 0);
-		    } else {
-		      $e.data('currentIndex', $e.data('currentIndex') + 1);
-		    }
+				if(typeof($e.data('currentIndex')) === "undefined"){
+					$e.data('currentIndex', 0);
+				} else {
+					$e.data('currentIndex', $e.data('currentIndex') + 1);
+				}
 
-		    if(typeof(targets[$e.data('currentIndex')]) === "undefined"){
-		      $e.data('currentIndex', 0);
-		    }
+				if(typeof(targets[$e.data('currentIndex')]) === "undefined"){
+					$e.data('currentIndex', 0);
+				}
 
-		    $e.typeTo(targets[$e.data('currentIndex')], $e.data('typerOptions'));
+				$e.typeTo(targets[$e.data('currentIndex')], $e.data('typerOptions'));
 		}
 	};
 
-
 	/**
-     * Bootstrap the $el.typer() function
-     */
-    $.fn.typer = function( options ) {
-		var $elements = $(this);
-		var opts = $.extend( {}, $.fn.typer.defaults, options );
+		 * Bootstrap the $el.typer() function
+		 */
+		$.fn.typer = function( options ) {
+			var $elements = $(this);
+			var opts = $.extend( {}, $.fn.typer.defaults, options );
 
-		return $elements.each(function () {
-		  var $e = $(this);
+			return $elements.each(function () {
+				var $e = $(this);
 
-		  if (typeof $e.attr(opts.typerDataAttr) === "undefined") {
-		    return;
-		  }
+				if (typeof $e.attr(opts.typerDataAttr) === "undefined") {
+					return;
+				}
 
-		  $e.data('typerOptions', opts); // Assign the options to the element, so it transports over to the other elements
+				$e.data('typerOptions', opts); // Assign the options to the element, so it transports over to the other elements
 
-		  typeWithAttribute($e);
-		  setInterval(function () {
-		    typeWithAttribute($e);
-		  }, $e.data('typerOptions').typerInterval);
+				typeWithAttribute($e);
+				
+				setInterval(function () {
+					typeWithAttribute($e);
+				}, $e.data('typerOptions').typerInterval);
+			});
+		};
 
-		});
-    };
-
-    /**
+		/**
 	 * Bootstrap the $el.typeTo function
 	 */
 	$.fn.typeTo = function ( newString, options ) {
@@ -203,57 +205,58 @@
 			i = 0,
 			j = 0;
 
-	    if (currentText === newString) {
-	      console.log("Our strings are equal, nothing to type");
-	      return $e;
-	    }
+			if (currentText === newString) {
+				console.log("Our strings are equal, nothing to type");
+				return $e;
+			}
 
-	    if (currentText !== $e.html()) {
-	      console.error("Typer does not work on elements with child elements.");
-	      return $e;
-	    }
+			if (currentText !== $e.html()) {
+				console.error("Typer does not work on elements with child elements.");
+				return $e;
+			}
 
-	    $e.data('typing', true);
-	    $e.data('typerOptions', opts);
+			$e.data('typing', true);
+			$e.data('typerOptions', opts);
 
-		if(!$e.data('typerOptions').wholeWord){
-		    while (currentText.charAt(i) === newString.charAt(i)) {
-		      i++;
-		    }
+			if(!$e.data('typerOptions').wholeWord){
+				while (currentText.charAt(i) === newString.charAt(i)) {
+					i++;
+				}
 
-		    while (currentText.rightChars(j) === newString.rightChars(j)) {
-		      j++;
-		    }
-	    }
+				while (currentText.rightChars(j) === newString.rightChars(j)) {
+					j++;
+				}
+			}
 
-	    newString = newString.substring(i, newString.length - j + 1);
+			newString = newString.substring(i, newString.length - j + 1);
 
-	    $e.data({
-	      oldLeft: currentText.substring(0, i),
-	      oldRight: currentText.rightChars(j - 1),
-	      leftStop: i,
-	      rightStop: currentText.length - j,
-	      primaryColor: $e.css('color'),
-	      backgroundColor: $e.css('background-color'),
-	      text: newString
-	    });
+			$e.data({
+				oldLeft: currentText.substring(0, i),
+				oldRight: currentText.rightChars(j - 1),
+				leftStop: i,
+				rightStop: currentText.length - j,
+				primaryColor: $e.css('color'),
+				backgroundColor: $e.css('background-color'),
+				text: newString
+			});
 
-	    highlight($e);
+			highlight($e);
 
-	    return $e;
+			return $e;
 	};
 
 	// The default settings
 	$.fn.typer.defaults = {
-		highlightSpeed    : 20,
-		typeSpeed         : 100,
-		clearDelay        : 500,
-		typeDelay         : 200,
-		clearOnHighlight  : true,
-		typerDataAttr     : 'data-typer-targets',
-		typerInterval     : 2000,
+		highlightSpeed		: 20,
+		typeSpeed				 : 100,
+		clearDelay				: 500,
+		typeDelay				 : 200,
+		clearOnHighlight	: true,
+		typerDataAttr		 : 'data-typer-targets',
+		typerInterval		 : 2000,
 		random			: false,
-		wholeWord			: false
+		wholeWord			: false,
+		stopOnHover			: false
 	};
 
 	String.prototype.rightChars = function(n){
