@@ -4,21 +4,65 @@
 </head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="dist/jquery.typer.min.js"></script>
-<!--<script src="src/jquery.typer.js"></script>-->
+<style>
+  html {
+    height: 100%;
+  }
+
+  body {
+    display: table;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    background: url("http://www.free-images.cc/wp-content/uploads/2015/09/eb7c6355b372746cb0ef30910684e013-1024x683.jpeg") center center no-repeat;
+    background-size: cover;
+  }
+
+  div.lightning {
+    background: rgba(0, 0, 0, 0.9);
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #ddd;
+  }
+
+  h1,
+  h2 {
+    font-weight: 100;
+  }
+
+  span[data-typer-targets] {
+    display: inline-block;
+    width: 190px;
+    text-align: left;
+  }
+</style>
 <body>
 
-  <h1>Hello, World!</h1>
-  <h2 class="typer_wholeword" data-typer-targets="qqqqqqqqqqqqqqqqqqqA,bbbbbbbbbbbbbbC,cccccccccccccccE,dddddddddddddF">Welcome</h2>
-
-  <!--<h2 class="typer" data-typer-targets="abcdefgfedcba,afgfa">Welcome</h2>-->
+  <div class="lightning">
+    <h1>I just love <span data-typer-targets="Hard-Rock!, Heavy-Metal!, Hip-Hop!, Jazz!, Reggae!"></span></h1>
+  </div>
 
 <script>
   $(function () {
     //$('.typer').typer();
-
-    $('.typer_wholeword').typer({
-      wholeWord: true,
-      stopOnHover: true
+    jQuery(document).ready(function($){
+      $('[data-typer-targets]').typer({
+        wholeWord: true,
+        clearDelay: 1000,
+        stopOnHover: true,
+        link: true,
+        links: [
+          "https://www.youtube.com/watch?v=fJ9rUzIMcZQ",
+          "https://www.youtube.com/watch?v=bkysjcs5vFU",
+          "https://www.youtube.com/watch?v=4B_UYYPb-Gk",
+          "https://www.youtube.com/watch?v=E2VCwBzGdPM",
+          "https://www.youtube.com/watch?v=BCCTTy4oDuM"
+        ],
+        linKTarget: "_blank"
+      });
     });
   });
 </script>

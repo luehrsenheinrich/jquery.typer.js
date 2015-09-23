@@ -132,12 +132,30 @@
 	* @param {object} $e The jQuery object of the typer element.
 	*/
 	var typeWithAttribute = function ($e) {
-		var targets;
+		var targets,
+			targetLinks = $e.data('typerOptions').links;
+
+		if($e.data('typerOptions').link) {
+			$e.css("cursor", "pointer");
+		}
+
+		if($e.data('typerOptions').link && $e.is(':hover') && targetLinks != null) {
+			$e.click(function (e) {
+				e.preventDefault();
+				if ($e.data('typerOptions').random && targetLinks[$e.data('randomNumber')] != null || undefined) {
+					//window.location.href = targetLinks[$e.data('randomNumber')];
+					window.open(targetLinks[$e.data('randomNumber')], $e.data('typerOptions').linkTarget);
+				} else if (targetLinks[$e.data('currentIndex')] != null || undefined) {
+					//window.location.href = targetLinks[$e.data('currentIndex')];
+					window.open(targetLinks[$e.data('currentIndex')], $e.data('typerOptions').linkTarget);
+				}
+			});
+		}
 
 		if ($e.data('typing')) {
 			return;
 		}
-
+		
 		if ($e.data('typerOptions').stopOnHover && $e.is(':hover')) {
 			return;
 		}
@@ -154,7 +172,8 @@
 
 		if($e.data('typerOptions').random){
 				// Just select the target to type randomly
-				$e.typeTo(targets[Math.floor(Math.random()*targets.length)]);
+				$e.data('randomNumber', Math.floor(Math.random()*targets.length));
+				$e.typeTo(targets[$e.data('randomNumber')], $e.data('typerOptions'));
 		} else {
 			// Determine the next index from the targets array and type that
 				if(typeof($e.data('currentIndex')) === "undefined"){
@@ -248,15 +267,18 @@
 	// The default settings
 	$.fn.typer.defaults = {
 		highlightSpeed		: 20,
-		typeSpeed				 : 100,
-		clearDelay				: 500,
-		typeDelay				 : 200,
+		typeSpeed			: 100,
+		clearDelay			: 500,
+		typeDelay			: 200,
 		clearOnHighlight	: true,
-		typerDataAttr		 : 'data-typer-targets',
-		typerInterval		 : 2000,
-		random			: false,
+		typerDataAttr		: 'data-typer-targets',
+		typerInterval		: 2000,
+		random				: false,
 		wholeWord			: false,
-		stopOnHover			: false
+		stopOnHover			: false,
+		link				: false,
+		links				: null,
+		linkTarget			: '_blank'
 	};
 
 	String.prototype.rightChars = function(n){
