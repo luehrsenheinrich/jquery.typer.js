@@ -38,7 +38,11 @@ There are some options that are available to you as well:
   typerDataAttr     : 'data-typer-targets',
   typerInterval     : 2000,
   random            : false,
-  wholeWord         : false
+  wholeWord         : false,
+  stopOnHover       : false,
+  link              : false,
+  links             : null,
+  linkTarget        : '_blank'
 }
 ```
 
