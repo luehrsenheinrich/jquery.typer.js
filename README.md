@@ -60,7 +60,11 @@ $("element").typer({
   typerDataAttr     : 'data-typer-targets',
   typerInterval     : 2000,
   random            : false,
-  wholeWord         : false
+  wholeWord         : false,
+  stopOnHover       : false,
+  link              : false,
+  links             : null,
+  linkTarget        : '_blank'
 });
 
 $("element").typeTo("new Word", {  
@@ -72,7 +76,11 @@ $("element").typeTo("new Word", {
   typerDataAttr     : 'data-typer-targets',
   typerInterval     : 2000,
   random            : false,
-  wholeWord         : false
+  wholeWord         : false,
+  stopOnHover       : false,
+  link              : false,
+  links             : null,
+  linkTarget        : '_blank'
 });
   
 ```
