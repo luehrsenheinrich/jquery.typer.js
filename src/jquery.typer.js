@@ -155,7 +155,7 @@
 		if ($e.data('typing')) {
 			return;
 		}
-		
+
 		if ($e.data('typerOptions').stopOnHover && $e.is(':hover')) {
 			return;
 		}
@@ -207,7 +207,7 @@
 				$e.data('typerOptions', opts); // Assign the options to the element, so it transports over to the other elements
 
 				typeWithAttribute($e);
-				
+
 				setInterval(function () {
 					typeWithAttribute($e);
 				}, $e.data('typerOptions').typerInterval);
